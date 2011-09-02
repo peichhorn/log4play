@@ -8,9 +8,12 @@ some cleanups here and there.
 ##### Enable the Log4Play module for the application
 
 In the `/conf/dependencies.yml` file, enable the Log4Play module by adding a line after require:
-`- play -> log4play 0.5
+
+`- play -> log4play 0.5`
 
 ##### Import default Log4Play routes
 
 In the conf/routes file, import the default module routes by adding this line:
+
 `*     /admin           module:log4play`
+
