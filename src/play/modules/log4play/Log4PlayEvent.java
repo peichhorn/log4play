@@ -14,6 +14,7 @@
  * limitations under the License.
  * 
  * @author Felipe Oliveira (http://mashup.fm)
+ * @author Deepthi Rallabandi
  * 
  */
 package play.modules.log4play;
@@ -23,60 +24,21 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.apache.log4j.Level;
+import org.apache.log4j.Priority;
 import org.apache.log4j.spi.LoggingEvent;
 
-/**
- * The Class Log4PlayEvent.
- */
 public class Log4PlayEvent {
-
-	/** The level. */
 	public String level;
-
-	/** The category. */
 	public String category;
-
-	/** The thread. */
 	public String thread;
-
-	/** The message. */
 	public String message;
-
-	/** The date. */
 	public String date;
 
-	/**
-	 * Instantiates a new log4 play event.
-	 * 
-	 * @param event
-	 *            the event
-	 */
-	public Log4PlayEvent(LoggingEvent event) {
-		// Define Date Format
-		DateFormat dateFormat = SimpleDateFormat.getDateTimeInstance();
-
-		// Set Data Fields
-		this.category = event.categoryName;
+	public Log4PlayEvent(final LoggingEvent event) {
+		this.category = event.getLoggerName();
 		this.thread = event.getThreadName();
-		this.date = dateFormat.format(new Date(event.getTimeStamp()));
-		this.message = event.getRenderedMessage();
-		this.message = this.message.replaceAll("\u003c", "&lt;").replaceAll("\u003e", "&gt;");
-
-		// Set Log Level
-		if (event.getLevel().toInt() == Level.TRACE_INT) {
-			this.level = "TRACE";
-		}
-		if (event.getLevel().toInt() == Level.DEBUG_INT) {
-			this.level = "DEBUG";
-		}
-		if (event.getLevel().toInt() == Level.INFO_INT) {
-			this.level = "INFO";
-		}
-		if (event.getLevel().toInt() == Level.WARN_INT) {
-			this.level = "WARN";
-		}
-		if (event.getLevel().toInt() == Level.ERROR_INT) {
-			this.level = "ERROR";
-		}
+		this.date = SimpleDateFormat.getDateTimeInstance().format(new Date(event.getTimeStamp()));
+		this.message = event.getRenderedMessage().replaceAll("\u003c", "&lt;").replaceAll("\u003e", "&gt;");
+		this.level = event.getLevel().toString();
 	}
 }

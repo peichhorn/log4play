@@ -14,6 +14,7 @@
  * limitations under the License.
  * 
  * @author Felipe Oliveira (http://mashup.fm)
+ * @author Deepthi Rallabandi
  * 
  */
 package play.modules.log4play;
@@ -22,19 +23,10 @@ import org.apache.log4j.Appender;
 import org.apache.log4j.WriterAppender;
 import org.apache.log4j.spi.LoggingEvent;
 
-// TODO: Auto-generated Javadoc
-/**
- * The Class PlayWebSocketLogAppender.
- */
 public class PlayWebSocketLogAppender extends WriterAppender implements Appender {
 
-	/**
-	 * Publish log event to WebSocket Stream
-	 * 
-	 * @see org.apache.log4j.WriterAppender#append(org.apache.log4j.spi.LoggingEvent)
-	 */
 	@Override
-	public void append(LoggingEvent event) {
+	public void append(final LoggingEvent event) {
 		LogStream.publish(new Log4PlayEvent(event));
 	}
 }

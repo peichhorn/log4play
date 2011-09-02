@@ -14,6 +14,7 @@
  * limitations under the License.
  * 
  * @author Felipe Oliveira (http://mashup.fm)
+ * @author Deepthi Rallabandi
  * 
  */
 package play.modules.log4play;
@@ -21,32 +22,14 @@ package play.modules.log4play;
 import play.libs.F.ArchivedEventStream;
 import play.libs.F.EventStream;
 
-// TODO: Auto-generated Javadoc
-/**
- * The Class LogStream.
- */
 public abstract class LogStream {
+	protected static final ArchivedEventStream<Log4PlayEvent> stream = new ArchivedEventStream<Log4PlayEvent>(50);
 
-	/** The stream. */
-	public static final ArchivedEventStream<Log4PlayEvent> stream = new ArchivedEventStream<Log4PlayEvent>(50);
-
-	/**
-	 * Gets the stream.
-	 * 
-	 * @return the stream
-	 */
 	public static EventStream<Log4PlayEvent> getStream() {
 		return stream.eventStream();
 	}
 
-	/**
-	 * Publish.
-	 * 
-	 * @param event
-	 *            the event
-	 */
-	public static void publish(Log4PlayEvent event) {
+	public static void publish(final Log4PlayEvent event) {
 		stream.publish(event);
 	}
-
 }
